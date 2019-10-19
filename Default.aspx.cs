@@ -27,8 +27,10 @@ namespace EcoHunt
 
             //Database.FirebaseDatabase.AddUrlsToPicturesWithoutUrls();
             //Database.FirebaseDatabase.TransferNameToGarbageFoundCategory("milky-way");
-            
-            
+            //Database.FirebaseUsers.CreateUser("Kade0", "abc");
+            //Database.FirebaseUsers.AddBrandNewGroupToUser("Kade0");
+            //Database.FirebaseUsers.AddGroupToUser("Kade1", "h2e51mc5");
+
             var allPicturesWithGarbage = Database.FirebaseDatabase.GetAllPictureWithGarbageNames();
             DisplayPics(allPicturesWithGarbage);
             

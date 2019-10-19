@@ -64,20 +64,20 @@ namespace EcoHunt.Database
             var response = GetData("NamesWithGarbage");
             object json = JsonConvert.DeserializeObject(response.Body);
 
-            List<NamesValues> patchNotes = new List<NamesValues>();
+            List<NamesValues> values = new List<NamesValues>();
             foreach (JToken item in ((JToken)(json)).Children())
             {
                 var newPatchNote = item.ToObject<NamesValues>();
-                patchNotes.Add(newPatchNote);
+                values.Add(newPatchNote);
             }
 
-            for (int x = patchNotes.Count - 1; x >= 0; x--)
+            for (int x = values.Count - 1; x >= 0; x--)
             {
-                if (patchNotes[x] == null)
-                    patchNotes.RemoveAt(x);
+                if (values[x] == null)
+                    values.RemoveAt(x);
             }
 
-            return patchNotes.ToArray();
+            return values.ToArray();
         }
         public static NamesValues[] GetAllPictureNames()
         {
@@ -85,20 +85,20 @@ namespace EcoHunt.Database
             var response = GetData("Names");
             object json = JsonConvert.DeserializeObject(response.Body);
 
-            List<NamesValues> patchNotes = new List<NamesValues>();
+            List<NamesValues> values = new List<NamesValues>();
             foreach (JToken item in ((JToken)(json)).Children())
             {
                 var newPatchNote = item.ToObject<NamesValues>();
-                patchNotes.Add(newPatchNote);
+                values.Add(newPatchNote);
             }
 
-            for (int x = patchNotes.Count - 1; x >= 0; x--)
+            for (int x = values.Count - 1; x >= 0; x--)
             {
-                if (patchNotes[x] == null)
-                    patchNotes.RemoveAt(x);
+                if (values[x] == null)
+                    values.RemoveAt(x);
             }
 
-            return patchNotes.ToArray();
+            return values.ToArray();
         }
         public static void DeletePicture(string pictureName)
         {
