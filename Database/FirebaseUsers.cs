@@ -9,6 +9,37 @@ namespace EcoHunt.Database
 {
     public class FirebaseUsers : DatabaseQueries
     {
+        public static void AddPoints(string userName, int pointsToAdd)
+        {
+            var user = GetUser(userName);
+            user.Points += pointsToAdd;
+
+            UpdateData("Users/" + user.ID, user);
+        }
+        public static void SubtractPoints(string userName, int pointsToSubtract)
+        {
+            var user = GetUser(userName);
+            user.Points -= pointsToSubtract;
+
+            UpdateData("Users/" + user.ID, user);
+        }
+        public static void SetPoints(string userName, int pointsToSetTo)
+        {
+            var user = GetUser(userName);
+            user.Points = pointsToSetTo;
+
+            UpdateData("Users/" + user.ID, user);
+        }
+        public static bool VerifyLogin(string userName, string password)
+        {
+            var allUsers = GetAllUsers();
+            for (int x = 0; x < allUsers.Length; x++)
+            {
+                if (allUsers[x].Name == userName && allUsers[x].Password == password)
+                    return true;
+            }
+            return false;
+        }
         public static void AddBrandNewGroupToUser(string userName)
         {
             string brandNewGroupID = RandomGroupIDGenerator.CreateNewGroupID();
@@ -131,5 +162,6 @@ namespace EcoHunt.Database
         public string Password;
         public int ID;
         public string GroupID;
+        public int Points;
     }
 }

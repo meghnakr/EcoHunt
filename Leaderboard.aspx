@@ -1,15 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Leaderboard.aspx.cs" Inherits="EcoHunt.Leaderboard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Leaderboard.aspx.cs" Inherits="EcoHunt.Leaderboard" %>
 
-<!DOCTYPE html>
+<asp:Content runat="server" ContentPlaceHolderID="MainContent">
+    <div class="jumbotron">
+        <asp:Label runat="server" Text="Invite your friends with this code:"></asp:Label>
+        <asp:Label runat="server" id="groupCodeLbl" Font-Bold="true"></asp:Label>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+        <br />
+        <br />
+
+        <asp:Literal runat="server" ID="leaderboardList"></asp:Literal>
+    </div>
+</asp:Content>
