@@ -10,6 +10,75 @@ namespace EcoHunt.Database
 {
     public class FirebaseDatabase : DatabaseQueries
     {
+        public static void TransferNameToGarbageFoundCategory(string name)
+        {
+            CheckForConnection();
+            var values = GetValuesAssociatedWithName(name);
+
+            InsertPictureIntoPicturesWithGarbage(values.name, values.url);
+            DeletePicture(values.ID);
+        }
+        public static void InsertPictureIntoPicturesWithGarbage(string _name, string _url)
+        {
+            CheckForConnection();
+            int newNum = GetNumberOfPicturesWithGarbage() + 1;
+
+
+            NamesValues newThing = new NamesValues { name =  _name, url = _url, ID = newNum };
+
+
+            InsertData("NamesWithGarbage/" + newThing.ID, newThing);
+            SetNumberOfPicturesWithGarbage(newThing.ID);
+        }
+        public static NamesValues GetValuesAssociatedWithName(string name)
+        {
+            CheckForConnection();
+            var allNames = GetAllPictureNames();
+
+            for (int x = 0; x < allNames.Length; x++)
+            {
+                if (allNames[x].name == name)
+                {
+                    return allNames[x];
+                }
+            }
+            return null;
+        }
+        public static NamesValues GetValuesAssociatedWithGarbagePicture(string name)
+        {
+            CheckForConnection();
+            var allNames = GetAllPictureWithGarbageNames();
+
+            for (int x = 0; x < allNames.Length; x++)
+            {
+                if (allNames[x].name == name)
+                {
+                    return allNames[x];
+                }
+            }
+            return null;
+        }
+        public static NamesValues[] GetAllPictureWithGarbageNames()
+        {
+            CheckForConnection();
+            var response = GetData("NamesWithGarbage");
+            object json = JsonConvert.DeserializeObject(response.Body);
+
+            List<NamesValues> patchNotes = new List<NamesValues>();
+            foreach (JToken item in ((JToken)(json)).Children())
+            {
+                var newPatchNote = item.ToObject<NamesValues>();
+                patchNotes.Add(newPatchNote);
+            }
+
+            for (int x = patchNotes.Count - 1; x >= 0; x--)
+            {
+                if (patchNotes[x] == null)
+                    patchNotes.RemoveAt(x);
+            }
+
+            return patchNotes.ToArray();
+        }
         public static NamesValues[] GetAllPictureNames()
         {
             CheckForConnection();
@@ -23,7 +92,7 @@ namespace EcoHunt.Database
                 patchNotes.Add(newPatchNote);
             }
 
-            for(int x = patchNotes.Count - 1; x >= 0; x--)
+            for (int x = patchNotes.Count - 1; x >= 0; x--)
             {
                 if (patchNotes[x] == null)
                     patchNotes.RemoveAt(x);
@@ -51,8 +120,37 @@ namespace EcoHunt.Database
 
             DeleteData("Names/" + pictureIndex);
 
-            if (currentNum == pictureIndex)
-                SetNumberOfNames(GetAllPictureNames().Last().ID);
+            try
+            {
+                if (currentNum == pictureIndex)
+                    SetNumberOfNames(GetAllPictureNames().Last().ID);
+            }
+            catch
+            {
+                //threre are no picture names
+            }
+        }
+        public static void DeletePictureFromGarbage(string name)
+        {
+            var pic = GetValuesAssociatedWithGarbagePicture(name);
+            DeletePictureFromGarbage(pic.ID);
+        }
+        public static void DeletePictureFromGarbage(int pictureIndex)
+        {
+            CheckForConnection();
+            int currentNum = GetNumberOfPicturesWithGarbage();
+
+            DeleteData("NamesWithGarbage/" + pictureIndex);
+
+            try
+            { 
+                if (currentNum == pictureIndex)
+                    SetNumberOfPicturesWithGarbage(GetAllPictureWithGarbageNames().Last().ID);
+            }
+            catch
+            {
+                //threre are no names
+            }
         }
 
         public static int GetNumberOfNames()
@@ -64,6 +162,16 @@ namespace EcoHunt.Database
         {
             CheckForConnection();
             InsertData("NumberOfNames", number);
+        }
+        public static int GetNumberOfPicturesWithGarbage()
+        {
+            CheckForConnection();
+            return Convert.ToInt32(client.Get("NumberOfPicturesWithGarbage").Body);
+        }
+        private static void SetNumberOfPicturesWithGarbage(int number)
+        {
+            CheckForConnection();
+            InsertData("NumberOfPicturesWithGarbage", number);
         }
         public static void AddUrlToPicture(string pictureName, string url)
         {
