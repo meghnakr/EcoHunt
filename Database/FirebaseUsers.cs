@@ -65,6 +65,13 @@ namespace EcoHunt.Database
             var allGroups = GetAllGroupIDs();
             return allGroups.Contains(groupID) ? true : false; 
         }
+        public static void RemoveGroupFromUser(string userName)
+        {
+            var user = GetUser(userName);
+            user.GroupID = String.Empty;
+
+            UpdateData("Users/" + user.ID, user);
+        }
         public static bool AddGroupToUser(string userName, string groupID, bool doesGroupNeedToExist = true)
         {
             var user = GetUser(userName);

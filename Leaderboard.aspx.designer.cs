@@ -13,6 +13,24 @@ namespace EcoHunt {
     public partial class Leaderboard {
         
         /// <summary>
+        /// primaryJumbotron control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl primaryJumbotron;
+        
+        /// <summary>
+        /// textGroupCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label textGroupCode;
+        
+        /// <summary>
         /// groupCodeLbl control.
         /// </summary>
         /// <remarks>
@@ -29,5 +47,23 @@ namespace EcoHunt {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal leaderboardList;
+        
+        /// <summary>
+        /// secondaryJumbotron control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl secondaryJumbotron;
+        
+        /// <summary>
+        /// linkBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button linkBtn;
     }
 }

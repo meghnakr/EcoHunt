@@ -13,6 +13,15 @@ namespace EcoHunt {
     public partial class JoinGroup {
         
         /// <summary>
+        /// mainJumbotron control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mainJumbotron;
+        
+        /// <summary>
         /// groupTextBox control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,23 @@ namespace EcoHunt {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button createNewGroupBtn;
+        
+        /// <summary>
+        /// secondaryJumbotron control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl secondaryJumbotron;
+        
+        /// <summary>
+        /// leaveGroupBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button leaveGroupBtn;
     }
 }
