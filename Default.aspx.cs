@@ -11,7 +11,9 @@ namespace EcoHunt
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Database.FirebaseDatabase.AddPicture("First Test");
+            //var allNames = Database.FirebaseDatabase.GetAllPictureNames();
+            //Database.FirebaseDatabase.DeletePicture("First Test");
         }
     }
 }
