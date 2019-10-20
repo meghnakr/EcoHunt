@@ -30,10 +30,15 @@ namespace EcoHunt
             //Database.FirebaseUsers.CreateUser("Kade0", "abc");
             //Database.FirebaseUsers.AddBrandNewGroupToUser("Kade0");
             //Database.FirebaseUsers.AddGroupToUser("Kade1", "h2e51mc5");
-
-            var allPicturesWithGarbage = Database.FirebaseDatabase.GetAllPictureWithGarbageNames();
-            DisplayPics(allPicturesWithGarbage);
-            
+            //Database.FirebaseCloudStorage.AddPhotoToStorage(MapPath("ImageNames.txt"));
+            //bool isGarbage = GetGarbage.CheckGarbage("https://firebasestorage.googleapis.com/v0/b/ecomake-de93b.appspot.com/o/Pictures%2Fmilky-way.jpg?alt=media&token=9fa46c36-1364-4b9d-bd7c-d3734b275525");
+            //var allPicturesWithGarbage = Database.FirebaseDatabase.GetAllPictureWithGarbageNames();
+            //DisplayPics(allPicturesWithGarbage);
+            //Database.FirebaseCloudStorage.ClearImageNameFile(MapPath("ImageNames.txt"));
+            //Database.FirebaseCloudStorage.CheckForNewFiles(MapPath("ImageNames.txt"));
+            //string url = "https://firebasestorage.googleapis.com/v0/b/ecomake-de93b.appspot.com/o/Pictures%2FImageNames.txt?alt=media&token=15e491e9-5014-462d-ae48-a504f62e4edb";
+            //string result = Database.FirebaseCloudStorage.GetImageNames(url);
+            DisplayPics(Database.FirebaseDatabase.GetAllPictureNames());
         }
         private void DisplayPics(Database.NamesValues[] pictures)
         {
