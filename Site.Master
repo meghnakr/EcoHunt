@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - EcoHunt </title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -17,7 +17,7 @@
 
 </head>
 <body>
-    <form runat="server">
+    <form runat="server"  style="margin-top:-49px">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -55,19 +55,19 @@
             </ul>
             <ul class="nav navbar-nav justify-content-end">
               <li class="nav-item">
-                <a class="nav-link" href="/LoginPage">Login</a>
+                <a class="nav-link" href="/MyProfile">My Profile</a>
               </li>
             </ul>
           </div>
         </nav>
-
+             
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - EcoHunt: By Kade, Aryan, Meghna, Gowri, Varun and Nithya.</p>
             </footer>
         </div>
 

@@ -7,56 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BoilerPlay {
-    
-    
-    public partial class Personal_profile {
-        
-        /// <summary>
-        /// createEventBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button createEventBtn;
-        
-        /// <summary>
-        /// allEventsBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button allEventsBtn;
-        
-        /// <summary>
-        /// myEventBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button myEventBtn;
-        
-        /// <summary>
-        /// profileBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button profileBtn;
-        
-        /// <summary>
-        /// logOutBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button logOutBtn;
-        
+namespace EcoHunt
+{
+
+
+    public partial class MyProfile
+    {
+
         /// <summary>
         /// Edit control.
         /// </summary>
@@ -65,7 +22,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton Edit;
-        
+
         /// <summary>
         /// Error_Flag control.
         /// </summary>
@@ -74,7 +31,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Error_Flag;
-        
+
         /// <summary>
         /// Success control.
         /// </summary>
@@ -83,52 +40,25 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Success;
-        
+
         /// <summary>
-        /// ProfileName control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ProfileName;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Email;
+
         /// <summary>
-        /// ProfileEmail control.
+        /// Points control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ProfileEmail;
-        
-        /// <summary>
-        /// Profile_Description control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Profile_Description;
-        
-        /// <summary>
-        /// Profile_PhoneNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Profile_PhoneNumber;
-        
-        /// <summary>
-        /// Profile_Year control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Profile_Year;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Points;
+
         /// <summary>
         /// label1 control.
         /// </summary>
@@ -137,7 +67,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl label1;
-        
+
         /// <summary>
         /// Profile_Password control.
         /// </summary>
@@ -146,7 +76,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword Profile_Password;
-        
+
         /// <summary>
         /// label2 control.
         /// </summary>
@@ -155,7 +85,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl label2;
-        
+
         /// <summary>
         /// Profile_Password1 control.
         /// </summary>
@@ -164,7 +94,7 @@ namespace BoilerPlay {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword Profile_Password1;
-        
+
         /// <summary>
         /// SubmitChanges control.
         /// </summary>
