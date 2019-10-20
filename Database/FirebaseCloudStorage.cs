@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -87,9 +88,44 @@ namespace EcoHunt.Database
                 string link = await upload;
 
                 string name = nameWithExtension.Remove(nameWithExtension.IndexOf("."));
+                fileUpload.Close();
                 return link;
             }
+            fileUpload.Close();
             return null;
+        }
+        public static string GetImageNamesFromFile(string url)
+        {
+
+            WebClient wc = new WebClient();
+            return wc.DownloadString(url);
+        }
+        public static void CheckForNewFiles(string filePath)
+        {
+            var task = Task.Run(async () => await
+                   GetDownloadLink("ImageNames.txt")
+                   );
+
+            task.Wait();
+            string downloadUrl = task.Result;
+            
+            string allNames = GetImageNamesFromFile(downloadUrl);
+
+            string[] parts = allNames.Split(',');
+
+            string[] allNewFileNames = new string[parts.Length - 1];
+            for(int x = 1; x < parts.Length; x++)
+            {
+                Database.FirebaseDatabase.AddPicture(parts[x].Replace(".jpg", String.Empty));
+            }
+            Database.FirebaseDatabase.AddUrlsToPicturesWithoutUrls();
+
+            ClearImageNameFile(filePath);
+        }
+        public static void ClearImageNameFile(string filePath)
+        {
+            DeletePhotoFromStorage("ImageNames.txt");
+            AddPhotoToStorage(filePath);
         }
         private static async Task<string> GetDownloadLink(string photoName)
         {
