@@ -55,19 +55,19 @@
             </ul>
             <ul class="nav navbar-nav justify-content-end">
               <li class="nav-item">
-                <a class="nav-link" href="/LoginPage">Login</a>
+                <a class="nav-link" href="/MyProfile">My Profile</a>
               </li>
             </ul>
           </div>
         </nav>
-
+             
 
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - EcoHunt: By Kade, Aryan, Meghna, Gowri, Varun and Nithya.</p>
             </footer>
         </div>
 

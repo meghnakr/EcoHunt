@@ -57,7 +57,7 @@ namespace EcoHunt.Database
             }
         }
 
-        protected static FirebaseResponse UpdateData(string path, object data)
+        public static FirebaseResponse UpdateData(string path, object data)
         {
             FirebaseResponse response = client.Update(path, data);
             return response;

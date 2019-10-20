@@ -11,7 +11,7 @@ namespace EcoHunt
 {
 
 
-    public partial class WebForm1
+    public partial class MyProfile
     {
 
         /// <summary>
@@ -42,49 +42,22 @@ namespace EcoHunt
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Success;
 
         /// <summary>
-        /// ProfileName control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ProfileName;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Email;
 
         /// <summary>
-        /// ProfileEmail control.
+        /// Points control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ProfileEmail;
-
-        /// <summary>
-        /// Profile_Description control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Profile_Description;
-
-        /// <summary>
-        /// Profile_PhoneNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl Profile_PhoneNumber;
-
-        /// <summary>
-        /// Profile_Year control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Profile_Year;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText Points;
 
         /// <summary>
         /// label1 control.
