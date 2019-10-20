@@ -14,6 +14,9 @@ namespace EcoHunt
         {
             string userName = Cookies.ReadCookie(this.Request, this.Response);
 
+            if (String.IsNullOrWhiteSpace(userName))
+                Response.Redirect("LoginPage.aspx");
+
             var user = Database.FirebaseUsers.GetUser(userName);
             if (String.IsNullOrEmpty(user.GroupID))
             {
