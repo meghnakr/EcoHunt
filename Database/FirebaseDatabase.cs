@@ -85,10 +85,44 @@ namespace EcoHunt.Database
             var response = GetData("Names");
             object json = JsonConvert.DeserializeObject(response.Body);
 
+            if (json == null)
+                return null;
+
             List<NamesValues> values = new List<NamesValues>();
             foreach (JToken item in ((JToken)(json)).Children())
             {
-                var newPatchNote = item.ToObject<NamesValues>();
+                NamesValues newPatchNote = null;
+                try
+                {
+                    newPatchNote = item.ToObject<NamesValues>();
+                }
+                catch
+                {
+                    try
+                    {
+                        var x = item.Children()[0];
+                        var token = (JToken)x;
+                        newPatchNote = token.ToObject<NamesValues>();
+                    }
+                    catch
+                    {
+                        var x = (JProperty)item;
+                        var y = x.Value<JProperty>();
+
+                        var children = y.Children();
+                        newPatchNote = new NamesValues();
+                        foreach (var child in children.First().Children())
+                        {
+                            var prop = (JProperty)child;
+                            if (prop.Name == "name")
+                                newPatchNote.name = prop.Value.ToString();
+                            else if (prop.Name == "url")
+                                newPatchNote.url = prop.Value.ToString();
+                            else if (prop.Name == "ID")
+                                newPatchNote.ID = Convert.ToInt32(prop.Value.ToString());
+                        }
+                    }
+                }
                 values.Add(newPatchNote);
             }
 

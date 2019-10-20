@@ -12,6 +12,7 @@ namespace EcoHunt
 {
     public partial class _Default : Page
     {
+        private string pathFile = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             //Database.FirebaseDatabase.AddPicture("First Test");
@@ -35,13 +36,30 @@ namespace EcoHunt
             //var allPicturesWithGarbage = Database.FirebaseDatabase.GetAllPictureWithGarbageNames();
             //DisplayPics(allPicturesWithGarbage);
             //Database.FirebaseCloudStorage.ClearImageNameFile(MapPath("ImageNames.txt"));
-            //Database.FirebaseCloudStorage.CheckForNewFiles(MapPath("ImageNames.txt"));
             //string url = "https://firebasestorage.googleapis.com/v0/b/ecomake-de93b.appspot.com/o/Pictures%2FImageNames.txt?alt=media&token=15e491e9-5014-462d-ae48-a504f62e4edb";
             //string result = Database.FirebaseCloudStorage.GetImageNames(url);
+
+            pathFile = MapPath("ImageNames.txt");
+
+            ThreadStart ts = new ThreadStart(CheckingClock);
+            Thread t = new Thread(ts);
+            t.Start();
+
             DisplayPics(Database.FirebaseDatabase.GetAllPictureNames());
+        }
+        private void CheckingClock()
+        {
+            while (true)
+            {
+                Thread.Sleep(30000);
+                Database.FirebaseCloudStorage.CheckForNewFiles(pathFile);
+            }
         }
         private void DisplayPics(Database.NamesValues[] pictures)
         {
+            if (pictures == null || pictures.Length == 0)
+                return;
+
             for (int x = 0; x < pictures.Length; x++)
             {
                 string url = pictures[x].url;

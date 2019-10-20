@@ -112,15 +112,37 @@ namespace EcoHunt.Database
             string allNames = GetImageNamesFromFile(downloadUrl);
 
             string[] parts = allNames.Split(',');
-
-            string[] allNewFileNames = new string[parts.Length - 1];
-            for(int x = 1; x < parts.Length; x++)
+            if (parts.Length > 1)
             {
-                Database.FirebaseDatabase.AddPicture(parts[x].Replace(".jpg", String.Empty));
-            }
-            Database.FirebaseDatabase.AddUrlsToPicturesWithoutUrls();
 
-            ClearImageNameFile(filePath);
+                string[] allNewFileNames = new string[parts.Length - 1];
+                for (int x = 1; x < parts.Length; x++)
+                {
+                    Database.FirebaseDatabase.AddPicture(parts[x].Replace(".jpg", String.Empty));
+                }
+                Database.FirebaseDatabase.AddUrlsToPicturesWithoutUrls();
+
+
+
+
+                ClearImageNameFile(filePath);
+            }
+            var allnames = Database.FirebaseDatabase.GetAllPictureNames();
+            if (allnames != null)
+            {
+                if (allNames.Length > 0)
+                {
+                    for (int x = 0; x < allnames.Length; x++)
+                    {
+                        bool abc = GetGarbage.CheckGarbage(allnames[x].url);
+                        if (!abc)//if it isn't garbage
+                        {
+                            Database.FirebaseDatabase.DeletePicture(allnames[x].ID);
+                            DeletePhotoFromStorage(allnames[x].name + ".jpg");
+                        }
+                    }
+                }
+            }
         }
         public static void ClearImageNameFile(string filePath)
         {
