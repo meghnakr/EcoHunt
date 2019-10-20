@@ -1,0 +1,84 @@
+import cv2
+# import python_jwt as jwt
+import sys
+import time
+import datetime
+#from sseclient import SSEClient
+#from urllib.parse import urlencode, quote
+from gcloud import storage
+from gcloud.storage import client
+
+#from firebase import firebase
+import requests
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
+from firebase_admin import db
+
+# import os
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/Desktop/ecomakeCreds.json"
+
+path = "/home/pi/Desktop/images/"
+i=1
+
+# firebase = firebase.FirebaseApplication('https://ecomake-de93b.firebaseio.com')
+# client = storage.Client()
+# bucket = client.get_bucket('ecomake-de93b.appspodata =
+cred = credentials.Certificate('/home/pi/Desktop/ecomakeCreds.json')
+firebase_admin.initialize_app(cred, {
+        'storageBucket':'ecomake-de93b.appspot.com'
+})
+bucket = storage.bucket()
+
+# config = {
+#  "apiKey": "AIzaSyBAjVe_Cytd3dyCU9SbfXhB4XW_Brv1hTM",
+#  "authDomain": "projectId.firebaseapp.com",
+#  "databaseURL": "https://ecomake-de93b.firebaseio.com",
+#  "storageBucket": "ecomake-de93b.appspot.com"
+#}
+
+#firebase = Firebase(config)
+
+
+# Get a reference to the auth service
+#auth = firebase.auth()
+
+# Log the user in
+#user = auth.sign_in_with_email_and_password('abc123@gmail.com', '123456')
+# Get a reference to the database service
+#db = firebase.database()
+
+#data = {"String0", "String1"}
+#db.child("ImageNames").push(data)
+
+#cred = credentials.Certificate('/home/pi/Desktop/ecomakeCreds.json')
+# firebase_admin.initialize_app(cred, {
+#'database URL': 'https://ecomake-de93b.firebaseio.com/'
+#})
+
+while i<5:
+        currentDateTime = datetime.datetime.utcnow().strftime("%m.%d.%Y-%H.%M.%S")
+        name = "i" + currentDateTime + ".jpg"
+        filepath = path + name
+        capture = cv2.VideoCapture('http://192.168.43.1:8080/video')
+        ret, frame = capture.read()
+        cv2.imwrite(filepath,frame)
+        # imageBlob = bucket.blob("/")
+        time.sleep(5)
+        imageBlob = bucket.blob("Pictures/"+name)
+        imageBlob.upload_from_filename(filepath)
+        textBlob = bucket.get_blob("Pictures/ImageNames.txt")
+        s1=textBlob.download_as_string()
+        print s1
+        s2=s1+','+name                                                                                                                                                                                                     f= open("names.txt","w+")
+        f.write(s2)
+        f.close()
+        textBlob2 = bucket.blob("Pictures/ImageNames.txt")
+        textBlob2.upload_from_filename("/home/pi/Desktop/names.txt")
+        i=i+1
+        print filepath
+
+print 'Done'
+
+capture.release()
+cv2.destroyAllWindows()
