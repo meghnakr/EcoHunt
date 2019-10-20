@@ -25,12 +25,19 @@ namespace EcoHunt.Database
         }
         public static string GetUrlForPhoto(string photoName)
         {
-            var task = Task.Run(async () => await
-                   Database.FirebaseCloudStorage.GetDownloadLink(photoName)
-                   );
+            try
+            {
+                var task = Task.Run(async () => await
+                       Database.FirebaseCloudStorage.GetDownloadLink(photoName)
+                       );
 
-            task.Wait();
-            return task.Result;
+                task.Wait();
+                return task.Result;
+            }
+            catch
+            {
+                return null;
+            }
         }
         public static bool DeletePhotoFromStorage(string photoName)
         {
@@ -96,20 +103,38 @@ namespace EcoHunt.Database
         }
         public static string GetImageNamesFromFile(string url)
         {
-
-            WebClient wc = new WebClient();
-            return wc.DownloadString(url);
+            try
+            {
+                WebClient wc = new WebClient();
+                return wc.DownloadString(url);
+            }
+            catch
+            {
+                return null;
+            }
         }
         public static void CheckForNewFiles(string filePath)
         {
-            var task = Task.Run(async () => await
-                   GetDownloadLink("ImageNames.txt")
-                   );
+            string downloadUrl = String.Empty;
+            try
+            {
+                var task = Task.Run(async () => await
+                       GetDownloadLink("ImageNames.txt")
+                       );
 
-            task.Wait();
-            string downloadUrl = task.Result;
+                task.Wait();
+                downloadUrl = task.Result;
+            }
+            catch
+            {
+                return;
+            }
             
+
             string allNames = GetImageNamesFromFile(downloadUrl);
+            if (allNames == null)
+                return;
+
 
             string[] parts = allNames.Split(',');
             if (parts.Length > 1)
@@ -118,6 +143,7 @@ namespace EcoHunt.Database
                 string[] allNewFileNames = new string[parts.Length - 1];
                 for (int x = 1; x < parts.Length; x++)
                 {
+                    allNewFileNames[x - 1] = parts[x];
                     Database.FirebaseDatabase.AddPicture(parts[x].Replace(".jpg", String.Empty));
                 }
                 Database.FirebaseDatabase.AddUrlsToPicturesWithoutUrls();
@@ -125,23 +151,28 @@ namespace EcoHunt.Database
 
 
 
-                ClearImageNameFile(filePath);
-            }
-            var allnames = Database.FirebaseDatabase.GetAllPictureNames();
-            if (allnames != null)
-            {
-                if (allNames.Length > 0)
+
+
+                var allnames = allNewFileNames;
+                if (allnames != null)
                 {
-                    for (int x = 0; x < allnames.Length; x++)
+                    if (allNames.Length > 0)
                     {
-                        bool abc = GetGarbage.CheckGarbage(allnames[x].url);
-                        if (!abc)//if it isn't garbage
+                        for (int x = 0; x < allnames.Length; x++)
                         {
-                            Database.FirebaseDatabase.DeletePicture(allnames[x].ID);
-                            DeletePhotoFromStorage(allnames[x].name + ".jpg");
+                            var name = Database.FirebaseDatabase.GetValuesAssociatedWithName(allnames[x].Replace(".jpg", String.Empty));
+
+                            bool abc = GetGarbage.CheckGarbage(name.url);
+                            if (!abc)//if it isn't garbage
+                            {
+                                Database.FirebaseDatabase.DeletePicture(name.ID);
+                                DeletePhotoFromStorage(name.name + ".jpg");
+                            }
                         }
                     }
                 }
+
+                ClearImageNameFile(filePath);
             }
         }
         public static void ClearImageNameFile(string filePath)
